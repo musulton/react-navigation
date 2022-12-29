@@ -1,4 +1,4 @@
-import {ROUTES} from "../constants";
+import {ROUTES} from "../../constants";
 
 const TypeList = ({onNavigate, params}) => (
     <>
