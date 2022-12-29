@@ -16,7 +16,10 @@ const CourseList = () => {
                     })}>Go to Add Course</button><br />
                     <button onClick={() => navigate(ROUTES.ADD_TYPE, {
                             state: { title: "from Course List" }
-                    })}>Go to Add Type</button>
+                    })}>Go to Add Type</button><br />
+                    <button onClick={() => navigate(`${ROUTES.EDIT_COURSE}/1234`, {
+                        state: { title: "from Course List" }
+                    })}>Go to Edit Course</button><br />
             </>
         )
 }
