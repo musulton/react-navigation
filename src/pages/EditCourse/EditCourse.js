@@ -1,4 +1,4 @@
-import {ROUTES} from "../constants";
+import {ROUTES} from "../../constants";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 
 const EditCourse = () => {

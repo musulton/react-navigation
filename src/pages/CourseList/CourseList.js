@@ -1,5 +1,5 @@
-import {ROUTES} from "../constants";
 import {useLocation, useNavigate} from "react-router-dom";
+import {ROUTES} from "../../constants";
 
 const CourseList = () => {
         const navigate = useNavigate();
