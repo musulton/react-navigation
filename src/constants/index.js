@@ -1,7 +1,8 @@
 export const ROUTES = {
-    COURSE_LIST: "/",
-    ADD_COURSE: "/add-course",
-    ADD_TYPE: "/add-type",
-    TYPE_LIST: "/type-list",
-    EDIT_COURSE: "/edit-course",
+    HOME: "/",
+    COURSE_LIST: "/course",
+    ADD_COURSE: "/course/add",
+    ADD_TYPE: "/type/add",
+    TYPE_LIST: "/type",
+    EDIT_COURSE: "/course/edit",
 }

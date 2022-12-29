@@ -8,6 +8,7 @@ import AddCourse from "./pages/AddCourse";
 import AddType from "./pages/AddType";
 import TypeList from "./pages/TypeList";
 import EditCourse from "./pages/EditCourse";
+import Dashboard from "./pages/Dashboard";
 
 const menu = [
   { path: ROUTES.COURSE_LIST, text: "Course List" },
@@ -35,28 +36,55 @@ function NavBar() {
 }
 
 
-function Layout() {
+function Course() {
   return (
-      <div className="App">
-        <NavBar />
-        <hr />
-        <Outlet />
+      <div>
+          <h1>Course</h1>
+          <Outlet />
       </div>
   )
 }
 
+
+function CourseType() {
+    return (
+        <div>
+            <h1>Course Type</h1>
+            <Outlet />
+        </div>
+    )
+}
+
+function Layout() {
+    return (
+        <div>
+            <h1>Enigma Course</h1>
+            <NavBar />
+            <hr />
+            <Outlet />
+        </div>
+    )
+}
+
 function App() {
   return (
-      <Routes>
-        <Route path={ROUTES.COURSE_LIST} element={<Layout />}>
-          <Route index={true} element={<CourseList />} />
-          <Route path={ROUTES.ADD_COURSE} element={<AddCourse />} />
-          <Route path={`${ROUTES.EDIT_COURSE}/:courseId?`} element={<EditCourse />} />
-          <Route path={ROUTES.TYPE_LIST} element={<TypeList />} />
-          <Route path={ROUTES.ADD_TYPE} element={<AddType />} />
-            <Route path={"*"} element={<h3>Not Found</h3>} />
-        </Route>
-      </Routes>
+      <div className="App">
+          <Routes>
+              <Route path={ROUTES.HOME} element={<Layout />}>
+                  <Route index={true} element={<Dashboard />} />
+                  <Route path={ROUTES.COURSE_LIST} element={<Course />}>
+                      <Route index element={<CourseList />} />
+                      <Route path={ROUTES.ADD_COURSE} element={<AddCourse />} />
+                      <Route path={`${ROUTES.EDIT_COURSE}/:courseId?`} element={<EditCourse />} />
+                  </Route>
+                  <Route path={ROUTES.TYPE_LIST} element={<CourseType />}>
+                      <Route index element={<TypeList />} />
+                      <Route path={ROUTES.ADD_TYPE} element={<AddType />} />
+                  </Route>
+              </Route>
+              <Route path={"*"} element={<h3>Page is not found</h3>} />
+          </Routes>
+      </div>
   )
 }
 
