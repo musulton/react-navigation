@@ -34,29 +34,20 @@ function NavBar() {
   )
 }
 
-
-function Layout() {
-  return (
-      <div className="App">
-        <NavBar />
-        <hr />
-        <Outlet />
-      </div>
-  )
-}
-
 function App() {
   return (
-      <Routes>
-        <Route path={ROUTES.COURSE_LIST} element={<Layout />}>
-          <Route index={true} element={<CourseList />} />
-          <Route path={ROUTES.ADD_COURSE} element={<AddCourse />} />
-          <Route path={`${ROUTES.EDIT_COURSE}/:courseId?`} element={<EditCourse />} />
-          <Route path={ROUTES.TYPE_LIST} element={<TypeList />} />
-          <Route path={ROUTES.ADD_TYPE} element={<AddType />} />
-            <Route path={"*"} element={<h3>Not Found</h3>} />
-        </Route>
-      </Routes>
+      <div className="App">
+          <NavBar />
+          <Routes>
+              <Route index={true} element={<h1>Dashboard Page</h1>} />
+              <Route index={true} path={ROUTES.COURSE_LIST} element={<CourseList />} />
+              <Route path={ROUTES.ADD_COURSE} element={<AddCourse />} />
+              <Route path={`${ROUTES.EDIT_COURSE}/:courseId?`} element={<EditCourse />} />
+              <Route path={ROUTES.TYPE_LIST} element={<TypeList />} />
+              <Route path={ROUTES.ADD_TYPE} element={<AddType />} />
+              <Route path={"*"} element={<h3>Not Found</h3>} />
+          </Routes>
+      </div>
   )
 }
 
