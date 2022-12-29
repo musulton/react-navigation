@@ -1,5 +1,5 @@
 import React from "react";
-import {Routes, Route, Outlet} from "react-router-dom";
+import {Outlet, createBrowserRouter, RouterProvider} from "react-router-dom";
 
 import "./App.css";
 import {Navbar} from "./components";
@@ -14,7 +14,6 @@ function Course() {
         </div>
     )
 }
-
 
 function CourseType() {
     return (
@@ -36,26 +35,32 @@ function Layout() {
     )
 }
 
+const appRouter = createBrowserRouter([
+    {
+        path: ROUTES.DASHBOARD,
+        element: <Layout />,
+        children: [
+            { index: true, element: <Dashboard /> },
+            { path: ROUTES.COURSE_LIST, element: <Course />, children: [
+                    { index: true, element: <CourseList /> },
+                    { path: ROUTES.ADD_COURSE, element: <AddCourse /> },
+                    { path: `${ROUTES.EDIT_COURSE}/:courseId?`, element: <EditCourse /> }
+                ] },
+            { path: ROUTES.TYPE_LIST, element: <CourseType />, children: [
+                    { index: true, element: <TypeList /> },
+                    { path: ROUTES.ADD_TYPE, element: <AddType /> }
+                ] },
+        ],
+    },
+    { path: "*", element: <h3>Page is not found</h3> }
+])
+
 function App() {
-    return (
-        <div className="App">
-            <Routes>
-                <Route path={ROUTES.DASHBOARD} element={<Layout />}>
-                    <Route index={true} element={<Dashboard />} />
-                    <Route path={ROUTES.COURSE_LIST} element={<Course />}>
-                        <Route index element={<CourseList />} />
-                        <Route path={ROUTES.ADD_COURSE} element={<AddCourse />} />
-                        <Route path={`${ROUTES.EDIT_COURSE}/:courseId?`} element={<EditCourse />} />
-                    </Route>
-                    <Route path={ROUTES.TYPE_LIST} element={<CourseType />}>
-                        <Route index element={<TypeList />} />
-                        <Route path={ROUTES.ADD_TYPE} element={<AddType />} />
-                    </Route>
-                </Route>
-                <Route path={"*"} element={<h3>Page is not found</h3>} />
-            </Routes>
-        </div>
-    )
+  return (
+      <div className="App">
+          <RouterProvider router={appRouter} />
+      </div>
+  )
 }
 
 export default App;
