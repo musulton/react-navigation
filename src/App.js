@@ -1,4 +1,5 @@
 import React from "react";
+import {Routes, Route, Outlet, Link} from "react-router-dom";
 
 import "./App.css";
 import {ROUTES} from "./constants";
@@ -14,57 +15,43 @@ const menu = [
   { path: ROUTES.ADD_TYPE, text: "Add Type" },
 ]
 
-function NavBar({onNavigate}) {
+function NavBar() {
   return (
       <nav>
         {menu.map((item) => (
-            <a
+            <Link
                 style={{ marginRight: 10 }}
-                href="#"
-                onClick={() => onNavigate(item.path, { title: "from NavBar" })}
+                to={item.path}
+                state={{ title: "from NavBar" }}
             >
               {item.text}
-            </a>
+            </Link>
         ))}
       </nav>
   )
 }
 
-function App() {
-  const [nav, setNav] = React.useState(ROUTES.COURSE_LIST)
-  const [params, setParams] = React.useState({
-    title: "Params Example"
-  })
-  let Component;
 
-  const onNavigate = (route, params = null) => {
-    setNav(route)
-    setParams(params)
-  }
-
-  switch (nav){
-    case ROUTES.COURSE_LIST:
-      Component = CourseList
-      break
-    case ROUTES.ADD_COURSE:
-      Component = AddCourse
-      break
-    case ROUTES.ADD_TYPE:
-      Component = AddType;
-      break
-    case ROUTES.TYPE_LIST:
-      Component = TypeList
-      break
-    default:
-      Component = CourseList
-      break
-  }
-
+function Layout() {
   return (
       <div className="App">
-        <NavBar onNavigate={onNavigate} />
-        <Component onNavigate={onNavigate} params={params} />
+        <NavBar />
+        <hr />
+        <Outlet />
       </div>
+  )
+}
+
+function App() {
+  return (
+      <Routes>
+        <Route path={ROUTES.COURSE_LIST} element={<Layout />}>
+          <Route index={true} element={<CourseList />} />
+          <Route path={ROUTES.ADD_COURSE} element={<AddCourse />} />
+          <Route path={ROUTES.TYPE_LIST} element={<TypeList />} />
+          <Route path={ROUTES.ADD_TYPE} element={<AddType />} />
+        </Route>
+      </Routes>
   )
 }
 
